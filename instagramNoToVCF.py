@@ -5,17 +5,20 @@
 #   İnstagram Ccontactsto vcf  / ixakblt  #
 #################################
 from bs4 import BeautifulSoup
+import unicodedata
 veri = """
-BURAYA HTML VERİSİ GELECEK
+HTML KODU BURAYA GELECEK
 """
 try:
     sonno = open("ixrehber.vcf","a")
     soup = BeautifulSoup(veri,"lxml")
     veri =soup.select("body > div > div")
-
     for i in veri:
         for j in i.select("div > div._33l-y > h1"):
-            ad =j.text
+            if "arabic" in unicodedata.name(j.text[0]).lower():
+                ad = "ixakblt Arapca"
+            else:
+                ad = j.text
         for k in i.select("div > div:nth-child(2) > h1"):
             if "@" in k.text:
                 soyad = " "
