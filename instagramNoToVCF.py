@@ -1,5 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+/*
+ixakblt - ibrahim AKBULUT
+-------------------------------
+ https://ixakblt.site
+-------------------------------
+https://ixakblt.com
+-------------------------------
+*/
+"""
+
+
 
 #################################
 #   İnstagram Ccontactsto vcf  / ixakblt  #
