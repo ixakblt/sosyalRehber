@@ -27,6 +27,8 @@ try:
         for j in i.select("div > div._33l-y > h1"):
             if "arabic" in unicodedata.name(j.text[0]).lower():
                 ad = "ixakblt Arapca"
+            elif "hammer and sickle" in unicodedata.name(j.text[-1]).lower():
+                ad = "{}".format(j.text[0:-1])
             else:
                 ad = j.text
         for k in i.select("div > div:nth-child(2) > h1"):
