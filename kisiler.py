@@ -4,8 +4,7 @@ from bs4 import BeautifulSoup
 from tabulate import tabulate
 import json
 
-
-veriler = BeautifulSoup(open('kisiler.html'), 'lxml')
+veriler = BeautifulSoup(open('a.html'), 'lxml')
 liste   =  []
 
 for kisi in veriler.findAll(class_='-xVjU f2nsG'):
@@ -41,15 +40,16 @@ for kisi in veriler.findAll(class_='-xVjU f2nsG'):
 essiz = [dict(sozluk) for sozluk in set(tuple(liste_ici.items()) for liste_ici in liste)]
 essiz = sorted(essiz, key=lambda sozluk: sozluk['adi'])
 
-# print(json.dumps(essiz, sort_keys=True, indent=2, ensure_ascii=False))
+# print(json.dumps(essiz, sort_keys=False, indent=2, ensure_ascii=False))
 # print(tabulate(essiz, headers='keys', tablefmt='psql'))
-# print(f'''
-# Orj : {len(liste)}
-# Dis : {len(essiz)}
-# ''')
+
+print(f'''
+Orj : {len(liste)}
+Dis : {len(essiz)}
+''')
 
 with open('bakalim.json', "w+") as dosya:
-    dosya.write(json.dumps(essiz, ensure_ascii=False, sort_keys=False, indent=2))
+    dosya.write(json.dumps(essiz, ensure_ascii=False, indent=2, sort_keys=False))
 
 with open('bakalim.md', "w+") as dosya:
     dosya.write(tabulate(essiz, headers='keys', tablefmt='github'))
