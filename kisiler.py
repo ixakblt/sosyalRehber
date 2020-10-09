@@ -36,13 +36,20 @@ for kisi in veriler.findAll(class_='-xVjU f2nsG'):
 
             if ad == kisi_adi:
                 kisi.update({'mail' : kisi_no})
+                break
 
 essiz = [dict(sozluk) for sozluk in set(tuple(liste_ici.items()) for liste_ici in liste)]
-
+essiz = sorted(essiz, key=lambda sozluk: sozluk['adi'])
 
 # print(json.dumps(essiz, sort_keys=True, indent=2, ensure_ascii=False))
-print(tabulate(essiz, headers='keys', tablefmt='psql'))
+# print(tabulate(essiz, headers='keys', tablefmt='psql'))
 # print(f'''
 # Orj : {len(liste)}
 # Dis : {len(essiz)}
 # ''')
+
+with open('bakalim.json', "w+") as dosya:
+    dosya.write(json.dumps(essiz, ensure_ascii=False, sort_keys=False, indent=2))
+
+with open('bakalim.md', "w+") as dosya:
+    dosya.write(tabulate(essiz, headers='keys', tablefmt='github'))
