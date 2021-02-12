@@ -4,10 +4,10 @@ from bs4 import BeautifulSoup
 from tabulate import tabulate
 import json
 
-veriler = BeautifulSoup(open('a.html'), 'lxml')
+veriler = BeautifulSoup(open('bakalim.html'), 'lxml')
 liste   =  []
 
-for kisi in veriler.findAll(class_='-xVjU f2nsG'):
+for kisi in veriler.findAll(class_='_54ird'):
     try:
         kisi_adi    = kisi.find(class_='yMV6Z').text
         kisi_no     = kisi.find(class_='ufG8g').text
