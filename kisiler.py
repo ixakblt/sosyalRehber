@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from tabulate import tabulate
 import json
 
-veriler = BeautifulSoup(open('bakalim.html'), 'lxml')
+veriler = BeautifulSoup(open('bakalim.html', encoding='utf-8'), 'lxml')
 liste   =  []
 
 for kisi in veriler.findAll(class_='_54ird'):
@@ -48,8 +48,28 @@ Orj : {len(liste)}
 Dis : {len(essiz)}
 ''')
 
-with open('bakalim.json', "w+") as dosya:
+with open('bakalim.json', "w+", encoding='utf-8') as dosya:
     dosya.write(json.dumps(essiz, ensure_ascii=False, indent=2, sort_keys=False))
 
-with open('bakalim.md', "w+") as dosya:
+with open('bakalim.md', "w+", encoding='utf-8') as dosya:
     dosya.write(tabulate(essiz, headers='keys', tablefmt='github'))
+
+with open('bakalim.vcf', "a+", encoding='utf-8') as dosya:
+    for kisi in essiz:
+        try:
+            dosya.write(f"""BEGIN:VCARD
+VERSION:3.0
+FN:{kisi['adi']}
+N:{kisi['adi']};;;
+TEL;TYPE=CELL:{kisi['no']}
+EMAIL;TYPE=INTERNET:{kisi['mail']}
+END:VCARD
+""")
+        except KeyError:
+            dosya.write(f"""BEGIN:VCARD
+VERSION:3.0
+FN:{kisi['adi']}
+N:{kisi['adi']};;;
+TEL;TYPE=CELL:{kisi['no']}
+END:VCARD
+""")
