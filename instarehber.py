@@ -1,5 +1,5 @@
-# Bu araç @keyiflerolsun tarafından | @KekikAkademi için yazılmıştır.
-
+# Bu araç @keyiflerolsun katkıları ile | @KekikAkademi için yazılmıştır.
+# -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
 from tabulate import tabulate
 import json
@@ -7,7 +7,7 @@ import json
 veriler = BeautifulSoup(open('bakalim.html', encoding='utf-8'), 'lxml')
 liste   =  []
 
-for kisi in veriler.findAll(class_='_54ird'):
+for kisi in veriler.findAll(class_='-xVjU f2nsG'):
     try:
         kisi_adi    = kisi.find(class_='yMV6Z').text
         kisi_no     = kisi.find(class_='ufG8g').text
@@ -39,9 +39,6 @@ for kisi in veriler.findAll(class_='_54ird'):
 
 essiz = [dict(sozluk) for sozluk in set(tuple(liste_ici.items()) for liste_ici in liste)]
 essiz = sorted(essiz, key=lambda sozluk: sozluk['adi'])
-
-# print(json.dumps(essiz, sort_keys=False, indent=2, ensure_ascii=False))
-# print(tabulate(essiz, headers='keys', tablefmt='psql'))
 
 print(f'''
 Orj : {len(liste)}
